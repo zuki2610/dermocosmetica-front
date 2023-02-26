@@ -16,6 +16,7 @@ header, .footer-text, .form-label{
 .doc-img {
   width: 250px;;
   margin-left: 7vw;
+  box-shadow:  0vh 0vh 15vh 2vh #888888;
 }
 article{
   grid-area: article; 
@@ -73,47 +74,35 @@ margin-left: 14vw;
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.focus-in-contract-bck {
-	-webkit-animation: focus-in-contract-bck 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: focus-in-contract-bck 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
- @-webkit-keyframes focus-in-contract-bck {
-  0% {
-    letter-spacing: 1em;
-    -webkit-transform: translateZ(300px);
-            transform: translateZ(300px);
-    -webkit-filter: blur(12px);
-            filter: blur(12px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateZ(12px);
-            transform: translateZ(12px);
-    -webkit-filter: blur(0);
-            filter: blur(0);
-    opacity: 1;
-  }
-}
-@keyframes focus-in-contract-bck {
-  0% {
-    letter-spacing: 1em;
-    -webkit-transform: translateZ(300px);
-            transform: translateZ(300px);
-    -webkit-filter: blur(12px);
-            filter: blur(12px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateZ(12px);
-            transform: translateZ(12px);
-    -webkit-filter: blur(0);
-            filter: blur(0);
-    opacity: 1;
-  }
+.blink-1 {
+	-webkit-animation: blink-1 .8s both;
+	        animation: blink-1 .8s both;
 }
 
+ @-webkit-keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+@keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
 .App-home {
-  background-image: url("https://pixabay.com/es/photos/perfume-botella-vidrio-1433653/");
+  background-image: url("https://raw.githubusercontent.com/zuki2610/dermocosmetica-front/main/public/assets/bg-1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
@@ -122,11 +111,7 @@ margin-left: 14vw;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  color: black;
 }
 
 @keyframes App-logo-spin {
@@ -153,13 +138,26 @@ margin-left: 42vw;
 margin-bottom: 7vh;
 
 }
-.animate__backInDown {
-background-image: url("https://img.freepik.com/foto-gratis/productos-maquillaje-agrupados-pinceles_23-2148181394.jpg?w=1060&t=st=1677380737~exp=1677381337~hmac=5b8d8d06d59ef94515807ac1b42f95af3251f517b868059a9f2ee5ca2e496c04");
-background-repeat: no-repeat;
-background-size: cover;
-height: 100vh;
-margin-top: 0;
+.form {
+  box-shadow:  0vh 0vh 7vh 2vh #6d6d6d;
+  border-radius: 10px;
+  padding: 2vh;
 }
-
-
-
+.btn {
+  background-color: rgba(255, 152, 255, 0.719)!important;
+  box-shadow:  0vh 0vh 3vh 0vh #6d6d6d;
+  margin-left: 11vw;
+  margin-top: 2vh;
+}
+.App-patient {
+  background-image: url("https://img.freepik.com/foto-gratis/productos-maquillaje-agrupados-pinceles_23-2148181394.jpg?w=1060&t=st=1677380737~exp=1677381337~hmac=5b8d8d06d59ef94515807ac1b42f95af3251f517b868059a9f2ee5ca2e496c04");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}

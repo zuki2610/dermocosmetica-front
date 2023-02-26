@@ -42,7 +42,7 @@ const Home = () => {
     <div className="home">
       <div className="App-home">
         <div className="container-grid">
-          <header className="bienvenida focus-in-contract-bck">
+          <header className="bienvenida blink-1">
             Bienvenida Mariana
           </header>
           <main>
@@ -51,9 +51,9 @@ const Home = () => {
               src="https://github.com/zuki2610/dermocosmetica-front/blob/main/public/assets/mariana.jpg?raw=true"
             />
           </main>
-          <article>
+          <article className="form">
             <form onSubmit={login}>
-              <div className="mb-3">
+              <div className="m-3">
                 <label className="form-label">Correo electrónico</label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
@@ -63,7 +63,7 @@ const Home = () => {
                   aria-describedby="emailHelp"
                 />
               </div>
-              <div className="mb-3">
+              <div className="m-3">
                 <label className="form-label">Password</label>
                 <input
                   onChange={(e) => setPassword(e.target.value)}
@@ -72,11 +72,11 @@ const Home = () => {
                   id="exampleInputPassword1"
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-purple">
                 Enviar
               </button>
-              <div id="emailHelp" className="form-text">
-                Que tengas una maravillosa consultael día de hoy!
+              <div id="emailHelp" className="form-text text-dark">
+                Ten una maravillosa consulta el día de hoy!
               </div>
             </form>
           </article>

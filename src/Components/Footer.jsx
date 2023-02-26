@@ -7,7 +7,7 @@ const Footer = () => {
     <footer>
     <div id="footer">
         
-<h4 className="footer-text">Creado con amor por Isabel Palacios 2023</h4>
+<h4 className="footer-text pt-5 fs-2 text-dark footer"><b>Creado con amor por Isabel Palacios 2023</b></h4>
 </div>
     </footer>
   );

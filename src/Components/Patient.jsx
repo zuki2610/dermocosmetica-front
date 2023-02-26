@@ -36,14 +36,12 @@ const Patient = () => {
           })
         };
     return (
-        <div className="animate__backInDown">
-        
+        <div className="App-patient">
         <div className="patient-title pt-4">
             <header> <h2 className="date focus-in-contract-bck">Hoy es {formattedDate} </h2>
             <h3 className="subtitle focus-in-contract-bck">Disfruta tu consulta</h3>
              </header>
         </div>
-       
         <Form onSubmit={handleSubmit} className="Form">
             <h3 className="mb-4"> Datos del Paciente</h3>
             <Form.Control type="text" className="mb-3" placeholder="Nombre"/>
@@ -52,7 +50,6 @@ const Patient = () => {
             <Form.Control type="text" className="mb-3" placeholder="Patología" />
             <Button variant="primary" type="submit" className="mb-5"> Enviar </Button>{' '}
         </Form>
-
         <Footer/>
         </div>
     )};
