@@ -7,9 +7,16 @@
     "main article article"
     "footer footer footer";
   gap:30px;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 3fr 2fr 1fr;
 }
-header, .footer-text, .form-label{
+.bg-home {
+  background: #e6d8f097!important;
+}
+.categories {
+  display: flex;
+  flex-direction: column;
+}
+header, .footer-text, .form-label, .categories{
   font-family: 'Great Vibes', cursive;
   grid-area: header;
 }
@@ -18,16 +25,30 @@ header, .footer-text, .form-label{
   margin-left: 7vw;
   box-shadow:  0vh 0vh 15vh 2vh #888888;
 }
-article{
+article, .article{
   grid-area: article; 
 }
 footer {
   grid-area: footer;
   text-align: center;
 }
+.App-medicines {
+  background-image: url("https://raw.githubusercontent.com/zuki2610/dermocosmetica-front/main/public/assets/bg-3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  margin: 0;
+}
 .bienvenida{
 font-size: 15vh;
 margin-left: 14vw;
+margin-top: 0;
 }
 .patient-title {
   color: #000;
@@ -63,12 +84,13 @@ margin-left: 14vw;
     opacity: 1;
   }
 }
-.main {
+main, .main {
   grid-area: main;
-  
 }
-.article {
-  grid-area: article;
+.card-img {
+  width: 24vw;
+  height: 24vh;
+  object-fit: cover;
 }
 .App-logo {
   height: 40vmin;
@@ -134,6 +156,9 @@ margin-top: 4vh;
 margin-left: 42vw;
 justify-content: center;
 }
+.form-medicina {
+  width: 21vw;
+}
 .form {
   box-shadow:  0vh 0vh 7vh 2vh #6d6d6d;
   border-radius: 10px;
@@ -158,8 +183,18 @@ justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
 }
+.medicine-main {
+  width: 29vw;
+  padding-left: 9vw;
+}
 .btn-patient {
   margin-right: 11vw;
+}
+.btn-medicines {
+  margin-left: 7vw;
+}
+.btn-medicines2 {
+  margin-left: 1vw;
 }
 .text-focus-in {
 	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -189,7 +224,6 @@ justify-content: center;
     opacity: 1;
   }
 }
-
 .jello-horizontal {
 	-webkit-animation: jello-horizontal 0.9s both;
 	        animation: jello-horizontal 0.9s both;
@@ -254,15 +288,28 @@ justify-content: center;
             transform: scale3d(1, 1, 1);
   }
 }
-.App-medicines {
-  background-image: url("https://raw.githubusercontent.com/zuki2610/dermocosmetica-front/main/public/assets/bg-2.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
+.card {
+  box-shadow:  0vh 0vh 3vh 0vh #6d6d6d;
+  border-radius: 10px;
+  margin-bottom: 2vh;
+  width: 38vw;
+}
+.medicine-title {
+  padding-left: 7vw;
+}
+.newMedicine {
+  background: #e6d8f097!important;
+  margin-top: 41vh;
+}
+.form-PDF {
+  background: #e6d8f097!important;
+  margin-left: 11vw;
+  width: 15vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
+}
+.btn-PDF {
+  margin-left: 1vw;
 }

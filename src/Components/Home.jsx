@@ -51,7 +51,7 @@ const Home = () => {
             />
           </main>
           <article className="form">
-            <form onSubmit={login}>
+            <form className="bg-home" onSubmit={login}>
               <div className="m-3">
                 <label className="form-label">Correo electrónico</label>
                 <input
