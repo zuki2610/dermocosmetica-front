@@ -3,17 +3,61 @@
 .container-grid {
   display: grid;
   grid-template-areas: 
-    "header header"
-    "main article"
-    "footer footer";
+    "header header header"
+    "main article article"
+    "footer footer footer";
+  gap:30px;
+  grid-template-columns: 3fr 1fr 1fr;
 }
-header .bienvenida {
+header, .footer-text{
   font-family: 'Great Vibes', cursive;
-  font-size: 15vh;
   grid-area: header;
 }
+.doc-img {
+  width: 250px;;
+}
+article{
+  grid-area: article; 
+}
+footer {
+  grid-area: footer;
+  text-align: center;
+}
+.bienvenida{
+font-size: 15vh;
+}
+.slide-in-bottom {
+	-webkit-animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .main {
   grid-area: main;
+  
 }
 .article {
   grid-area: article;
@@ -28,8 +72,46 @@ header .bienvenida {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.focus-in-contract-bck {
+	-webkit-animation: focus-in-contract-bck 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: focus-in-contract-bck 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+ @-webkit-keyframes focus-in-contract-bck {
+  0% {
+    letter-spacing: 1em;
+    -webkit-transform: translateZ(300px);
+            transform: translateZ(300px);
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(12px);
+            transform: translateZ(12px);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes focus-in-contract-bck {
+  0% {
+    letter-spacing: 1em;
+    -webkit-transform: translateZ(300px);
+            transform: translateZ(300px);
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(12px);
+            transform: translateZ(12px);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
 
-.App-header {
+.App-home {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -52,3 +134,21 @@ header .bienvenida {
     transform: rotate(360deg);
   }
 }
+.patient-title, .subtitle, .date {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  margin-top: 1.5vh;
+}
+.Form {
+width: 18vw;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 7vh;
+margin-left: 42vw;
+margin-bottom: 7vh;
+
+}
+
+
