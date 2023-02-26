@@ -6,6 +6,7 @@ import '.././App.css';
 import { Form, Button } from 'react-bootstrap';
 import Footer from './Footer';
 
+
 const moment = require('moment');
 const formattedDate = moment().format('DD/MM/YY');
 console.log(formattedDate);
@@ -35,8 +36,9 @@ const Patient = () => {
           })
         };
     return (
-        <>
-        <div className="patient-title">
+        <div className="animate__backInDown">
+        
+        <div className="patient-title pt-4">
             <header> <h2 className="date focus-in-contract-bck">Hoy es {formattedDate} </h2>
             <h3 className="subtitle focus-in-contract-bck">Disfruta tu consulta</h3>
              </header>
@@ -46,12 +48,13 @@ const Patient = () => {
             <h3 className="mb-4"> Datos del Paciente</h3>
             <Form.Control type="text" className="mb-3" placeholder="Nombre"/>
             <Form.Control type="text" className="mb-3" placeholder="Edad" />
+            <Form.Control type="text" className="mb-3" placeholder="Rut" />
             <Form.Control type="text" className="mb-3" placeholder="Patología" />
-            <Button variant="primary" type="submit"> Enviar </Button>{' '}
+            <Button variant="primary" type="submit" className="mb-5"> Enviar </Button>{' '}
         </Form>
 
         <Footer/>
-        </>
+        </div>
     )};
 
 

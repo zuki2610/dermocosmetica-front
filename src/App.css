@@ -9,12 +9,13 @@
   gap:30px;
   grid-template-columns: 3fr 1fr 1fr;
 }
-header, .footer-text{
+header, .footer-text, .form-label{
   font-family: 'Great Vibes', cursive;
   grid-area: header;
 }
 .doc-img {
   width: 250px;;
+  margin-left: 7vw;
 }
 article{
   grid-area: article; 
@@ -25,6 +26,7 @@ footer {
 }
 .bienvenida{
 font-size: 15vh;
+margin-left: 14vw;
 }
 .slide-in-bottom {
 	-webkit-animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -64,7 +66,6 @@ font-size: 15vh;
 }
 .App-logo {
   height: 40vmin;
-  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -112,7 +113,9 @@ font-size: 15vh;
 }
 
 .App-home {
-  background-color: #282c34;
+  background-image: url("https://pixabay.com/es/photos/perfume-botella-vidrio-1433653/");
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -138,7 +141,7 @@ font-size: 15vh;
   display: flex;
   justify-content: center;
   font-size: 1.5em;
-  margin-top: 1.5vh;
+  padding-top: 1.5vh;
 }
 .Form {
 width: 18vw;
@@ -150,5 +153,13 @@ margin-left: 42vw;
 margin-bottom: 7vh;
 
 }
+.animate__backInDown {
+background-image: url("https://img.freepik.com/foto-gratis/productos-maquillaje-agrupados-pinceles_23-2148181394.jpg?w=1060&t=st=1677380737~exp=1677381337~hmac=5b8d8d06d59ef94515807ac1b42f95af3251f517b868059a9f2ee5ca2e496c04");
+background-repeat: no-repeat;
+background-size: cover;
+height: 100vh;
+margin-top: 0;
+}
+
 
 

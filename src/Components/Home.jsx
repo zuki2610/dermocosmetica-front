@@ -39,7 +39,7 @@ const Home = () => {
   }
 
   return (
-    <div className="App">
+    <div className="home">
       <div className="App-home">
         <div className="container-grid">
           <header className="bienvenida focus-in-contract-bck">
