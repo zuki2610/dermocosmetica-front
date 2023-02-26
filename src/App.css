@@ -29,6 +29,12 @@ footer {
 font-size: 15vh;
 margin-left: 14vw;
 }
+.patient-title {
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  padding-top: 2vh;
+}
 .slide-in-bottom {
 	-webkit-animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -57,7 +63,6 @@ margin-left: 14vw;
     opacity: 1;
   }
 }
-
 .main {
   grid-area: main;
   
@@ -68,7 +73,6 @@ margin-left: 14vw;
 .App-logo {
   height: 40vmin;
 }
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -113,7 +117,6 @@ margin-left: 14vw;
   font-size: calc(10px + 2vmin);
   color: black;
 }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -122,21 +125,14 @@ margin-left: 14vw;
     transform: rotate(360deg);
   }
 }
-.patient-title, .subtitle, .date {
-  display: flex;
-  justify-content: center;
-  font-size: 1.5em;
-  padding-top: 1.5vh;
-}
 .Form {
-width: 18vw;
+width: 24vw;
 display: flex;
 flex-direction: column;
 align-items: center;
-margin-top: 7vh;
+margin-top: 4vh;
 margin-left: 42vw;
-margin-bottom: 7vh;
-
+justify-content: center;
 }
 .form {
   box-shadow:  0vh 0vh 7vh 2vh #6d6d6d;
@@ -148,9 +144,118 @@ margin-bottom: 7vh;
   box-shadow:  0vh 0vh 3vh 0vh #6d6d6d;
   margin-left: 11vw;
   margin-top: 2vh;
+  border-color: rgba(255, 152, 255, 0.416)!important;;
 }
 .App-patient {
-  background-image: url("https://img.freepik.com/foto-gratis/productos-maquillaje-agrupados-pinceles_23-2148181394.jpg?w=1060&t=st=1677380737~exp=1677381337~hmac=5b8d8d06d59ef94515807ac1b42f95af3251f517b868059a9f2ee5ca2e496c04");
+  background-image: url("https://raw.githubusercontent.com/zuki2610/dermocosmetica-front/main/public/assets/bg-2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+.btn-patient {
+  margin-right: 11vw;
+}
+.text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+ @-webkit-keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.jello-horizontal {
+	-webkit-animation: jello-horizontal 0.9s both;
+	        animation: jello-horizontal 0.9s both;
+}
+ @-webkit-keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+.App-medicines {
+  background-image: url("https://raw.githubusercontent.com/zuki2610/dermocosmetica-front/main/public/assets/bg-2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;

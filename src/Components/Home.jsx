@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ".././App.css";
 import { Image } from "react-bootstrap";
 import Footer from "./Footer";
-
 import { Navigate } from 'react-router-dom';
 
 const Home = () => {
