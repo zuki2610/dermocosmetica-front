@@ -4,6 +4,7 @@ import ".././App.css";
 import { Image } from "react-bootstrap";
 import Footer from "./Footer";
 import { Navigate } from 'react-router-dom';
+import { guardarDatosEnLocalStorage } from "../storage";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +27,7 @@ const Home = () => {
       if (data.status === 200) {
         const response = await data.json();
         console.log(response);
+        guardarDatosEnLocalStorage("token", JSON.stringify(response));
         setLoggedIn(true);
       }
     } catch (error) {
@@ -34,7 +36,7 @@ const Home = () => {
   };
 
   if (loggedIn) {
-    return <Navigate to="/dermocosmetica/patient" />;
+    return <Navigate to="/dermocosmetica/paciente" />;
   }
 
   return (
