@@ -196,6 +196,9 @@ justify-content: center;
 .btn-medicines2 {
   margin-left: 1vw;
 }
+.btn-medicines3 {
+  margin-left: 10vw;
+}
 .text-focus-in {
 	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -299,12 +302,12 @@ justify-content: center;
 }
 .newMedicine {
   background: #e6d8f097!important;
-  margin-top: 41vh;
+  width: 26vw;
 }
 .form-PDF {
   background: #e6d8f097!important;
-  margin-left: 11vw;
-  width: 15vw;
+  margin-left: 14vw;
+  width: 11vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -312,4 +315,32 @@ justify-content: center;
 }
 .btn-PDF {
   margin-left: 1vw;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+}
+
+.react-datepicker__input-container {
+  display: block;
+}
+
+.react-datepicker__input-container input {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: 0;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
