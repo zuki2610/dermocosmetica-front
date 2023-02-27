@@ -3,16 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import '.././App.css';
-import { Form, Button, } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import Footer from './Footer';
 import { BsFillTrashFill, BsCheck2Circle, BsFillSaveFill } from "react-icons/bs";
-import { obtenerDatosDeLocalStorage } from "../storage";
-
-
+import { guardarDatosEnLocalStorage, obtenerDatosDeLocalStorage } from "../storage";
+import { PDFViewer } from '@react-pdf/renderer';
+import PDFDocument from "./PDFDocument";
 
 const Medicines = () => {
     const [categorias, setCategorias] = useState([]);
     const [marcas, setMarcas] = useState([]);
+    const [categoriasMarcadas, setCategoriasMarcadas] = useState({});
+    const [marcasMarcadas, setMarcasMarcadas] = useState({});
+    const [medicinasEncontradas, setMedicinasEncontradas] = useState([]);
+    const [indicaciones, setIndicaciones] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    const [paciente, setPaciente] = useState({});
     /**formulario de crear medicina */
     const [imagenMedicina, setImagenMedicna] = useState(null);
     const [nombreMedicina, setNombreMedicina] = useState('');
@@ -26,6 +32,25 @@ const Medicines = () => {
 
     const { token } = obtenerDatosDeLocalStorage('token');
 
+    const manejarCambioCategoria = (evento) => {
+        const categoriaId = evento.target.value;
+        const estaMarcada = evento.target.checked;
+        setCategoriasMarcadas({
+          ...categoriasMarcadas,
+          [categoriaId]: estaMarcada,
+        });
+      };
+    
+    const manejarCambioMarca = (evento) => {
+        const marcaId = evento.target.value;
+        const estaMarcada = evento.target.checked;
+        setMarcasMarcadas({
+            ...marcasMarcadas,
+            [marcaId]: estaMarcada,
+        });
+    };
+
+
     function manejarCargaImagen(evento) {
         const archivo = evento.target.files[0];
         setImagenMedicna(archivo);
@@ -36,8 +61,7 @@ const Medicines = () => {
         const formData = new FormData();
         formData.append('file', imagenMedicina);
         formData.append('name', nombreMedicina);
-        // formData.append('marca', marcaMedicina);
-        console.log(marcaMedicina);
+        formData.append('marca', marcaMedicina);
         formData.append('componente', componenteMedicina);
         formData.append('categoriaNames', categoriaMedicina);
         console.log(formData);
@@ -55,6 +79,16 @@ const Medicines = () => {
                 text: 'Medicina registrada con éxito',
             });
         }
+    }
+
+    const registrarIndicacion = () => {
+        guardarDatosEnLocalStorage('indicaciones', indicaciones);
+        
+        Swal.fire({
+            icon: 'success',
+            title: '¡Perfecto!',
+            text: 'Indicaciones registradas con éxito',
+        });
     }
 
 
@@ -132,10 +166,71 @@ const Medicines = () => {
         console.log(marcas);
     }
 
+    const obtenerMedicinasPorCategorias = async () => {
+        const categoriasSeleccionadas = Object.keys(categoriasMarcadas).filter(
+          (idCategoria) => categoriasMarcadas[idCategoria]
+        );
+        
+        console.log('categoriasSeleccionadas', categoriasSeleccionadas);
+        const idsCategorias = categoriasSeleccionadas.join(",");
+        console.log('idsCategorias', idsCategorias);
+
+        const url = `http://localhost:3001/api/dermocosmetica/medicinas/categorias?ids=${idsCategorias}`;
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      
+        const response = await fetch(url, {
+          headers,
+        });
+      
+        if (response.ok) {
+          const data = await response.json();
+          // haz algo con los datos recibidos
+          console.log(data);
+          setMedicinasEncontradas(data.data);
+        } else {
+          console.error("Error al obtener medicinas");
+        }
+      };
+    
+    const obtenerMedicinasPorMarcas = async () => {
+        const marcasSeleccionadas = Object.keys(marcasMarcadas).filter(
+            (idMarca) => marcasMarcadas[idMarca]
+        );
+        console.log('marcasSeleccionadas', marcasSeleccionadas);
+        const idsMarcas = marcasSeleccionadas.join(",");
+        console.log('idsMarcas', idsMarcas);
+
+        const url = `http://localhost:3001/api/dermocosmetica/medicinas/marcas?ids=${idsMarcas}`;
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+        const response = await fetch(url, {
+            headers,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            // haz algo con los datos recibidos
+            console.log(data);
+            setMedicinasEncontradas(data.data);
+        } else {
+            console.error("Error al obtener medicinas");
+        }
+    };
+
+    const obtenerDatosPaciente = () => {
+        const paciente = obtenerDatosDeLocalStorage('paciente');
+        setPaciente(paciente);
+    }
+
+    const handlePdfGeneration = () => {
+        // Establecer el estado para indicar que la ventana modal está abierta
+        setModalOpen(true);
+      }
 
     useEffect(() => {
         obtenerCategorias();
         obtenerMarcas();
+        obtenerDatosPaciente();
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
@@ -153,29 +248,46 @@ const Medicines = () => {
                             <h2 className="form-label">Categoría</h2>
                             {
                                 categorias.map((categoria) => {
+                                    const estaMarcada = categoriasMarcadas[categoria._id] || false;
+
                                     return (
                                         <div className="form-check form-switch">
-                                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{categoria.name}</label>
+                                            <input className="form-check-input" 
+                                                type="checkbox" 
+                                                role="switch"
+                                                id={categoria._id}
+                                                name={categoria.name}
+                                                checked={estaMarcada}
+                                                value={categoria._id}
+                                                onChange={manejarCambioCategoria}/>
+                                            <label className="form-check-label" htmlFor={categoria._id}>{categoria.name}</label>
                                         </div>
                                     )
                                 })
                             }
-                            <Button type="submit" className="btn btn-medicines"> Enviar </Button>{' '}
+                            <Button type="button" className="btn btn-medicines" onClick={obtenerMedicinasPorCategorias}> Enviar </Button>{' '}
                         </div>
                         <div className="form form-medicina mb-5">
                             <h2 className="form-label">Marca</h2>
                             {
                                 marcas.map((marca) => {
+                                    const estaMarcada = marcasMarcadas[marca._id] || false;
                                     return (
                                         <div className="form-check form-switch">
-                                        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                                        <input className="form-check-input" 
+                                            type="checkbox" 
+                                            role="switch"
+                                            id={marca._id}
+                                            name={marca.name}
+                                            checked={estaMarcada}
+                                            value={marca._id}
+                                            onChange={manejarCambioMarca}/>
                                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{marca.name}</label>
                                     </div>
                                     )
                                 })
                             }
-                            <Button type="submit" className="btn btn-medicines"> Enviar </Button>{' '}
+                            <Button type="button" className="btn btn-medicines" onClick={obtenerMedicinasPorMarcas}> Enviar </Button>{' '}
                         </div>
                         <div>
                             <div className="form form-medicina">
@@ -195,8 +307,8 @@ const Medicines = () => {
                             </div>
                         </div>
                         <div>
-                            <div className="form form-medicina">
-                                <h2 className="form-label fs-4">Nueva Marga</h2>
+                            <div className="form form-medicina mt-5">
+                                <h2 className="form-label fs-4 pt-1">Nueva Marca</h2>
                                 <div>
                                     <Form onSubmit={registrarMarca}>
                                         <Form.Control 
@@ -214,24 +326,43 @@ const Medicines = () => {
                     </main>
                     <article className="article">
                         <div className="container">
-                            <div className="card form flex-row flex-wrap">
+                            {
+                                medicinasEncontradas.map((medicina) => {
+                                    const imagenUrl = medicina.imagenUrl !== undefined ? medicina.imagenUrl : "https://falabella.scene7.com/is/image/Falabella/50077328_1?wid=800&hei=800&qlt=70";
+                                    return (
+                                        <div className="card form flex-row flex-wrap">
+                                            <div className="card-header border-0">
+                                                <img className="card-img" src={imagenUrl} alt="" />
+                                            </div>
+                                            <div className="card-block px-2">
+                                                <h5 className="card-title">Nombre: <span className="text-secondary">{medicina.name}</span></h5>
+                                                <h6 className="card-text">Marca: <span className="text-secondary">{medicina.marcaId.name}</span></h6>
+                                                <h6 className="card-text">Componentes: <span className="text-secondary">{medicina.componente.join(' ')}</span></h6>
+                                                <h4 type="submit" className="btn btn-medicines2"> <BsCheck2Circle /> </h4>{' '}
+                                                <h4 type="submit" className="btn btn-medicines2"> <BsFillTrashFill /> </h4>{' '}
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className="container mt-5 ms-5">
+                            <div className="card form flex-row flex-wrap newMedicine ms-5">
                                 <div className="card-header border-0">
-                                    <img className="card-img" src="https://falabella.scene7.com/is/image/Falabella/50077328_1?wid=800&hei=800&qlt=70" alt="" />
-                                </div>
-                                <div className="card-block px-2">
-                                    <h5 className="card-title">Nombre:<span className="text-secondary">tomate</span></h5>
-                                    <h6 className="card-text">Categoría:<span className="text-secondary">tomatican</span></h6>
-                                    <h6 className="card-text">Marca:<span className="text-secondary">tomaton</span></h6>
-                                    <h6 className="card-text">Componentes:<span className="text-secondary">tomate</span></h6>
-                                    <h4 type="submit" className="btn btn-medicines2"> <BsCheck2Circle /> </h4>{' '}
-                                    <h4 type="submit" className="btn btn-medicines2"> <BsFillTrashFill /> </h4>{' '}
+                                    <Form>
+                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <h2 className="form-label fs-3">Indicaciones</h2>
+                                            <textarea id="indicaciones" className="indicaciones" rows="5" value={indicaciones} onChange={e => setIndicaciones(e.target.value)} />
+                                            <Button type="button" className="btn btn-medicines3 text-dark" onClick={registrarIndicacion}>  <BsCheck2Circle/>{' '} </Button>{' '}
+                                        </Form.Group>
+                                    </Form>
                                 </div>
                             </div>
-                        </div>
+                        </div>                      
                         <div className="form form-PDF">
                             <h6 className="text-secondary">Generar PDF</h6>
                             <div>
-                                <h4 type="submit" className="btn btn-PDF"><BsFillSaveFill /></h4>{' '}
+                                <Button type="button" className="btn btn-PDF" onClick={handlePdfGeneration}><BsFillSaveFill /></Button>
                             </div>
                         </div>
                         <div className="container mt-5 ms-5">
@@ -253,12 +384,27 @@ const Medicines = () => {
                             </div>
                         </div>
                     </article>
+                    <Modal show={modalOpen} onHide={() => setModalOpen(false)} size="xl">
+                    <Modal.Header closeButton>
+                        <Modal.Title>Documento PDF</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="pdf-viewer-container">
+                            <PDFViewer>
+                            <PDFDocument paciente={paciente} recomendaciones={indicaciones} medicinas={medicinasEncontradas} />
+                            </PDFViewer>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setModalOpen(false)}>
+                        Cerrar
+                        </Button>
+                    </Modal.Footer>
+                    </Modal>
                     <Footer />
                 </div>
             </div>
         </div>
     );
-   
-    
 }
     export default Medicines;
